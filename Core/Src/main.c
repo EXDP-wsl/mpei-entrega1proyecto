@@ -240,6 +240,10 @@ static void MX_TIM3_Init(void)
   {
     Error_Handler();
   }
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM3_Init 2 */
 
   /* USER CODE END TIM3_Init 2 */
@@ -260,52 +264,18 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, recibe_datos_Pin|DO_infrarrojo_Pin|echo_ultrasonic_Pin|trig_ultras_nico_Pin
-                          |in3_Pin|in4_Pin|scl_Pin|sda_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, IN1_MOTOR_A_Pin|IN2_MOTOR_A_Pin|IN3_MOTOR_B_Pin|IN4_MOTOR_B_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, distancia_1_Pin|distancia_2_Pin|do_vibracion_Pin|sg90_Pin
-                          |ena_Pin|in1_Pin|in2_Pin|enb_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pins : recibe_datos_Pin DO_infrarrojo_Pin echo_ultrasonic_Pin trig_ultras_nico_Pin
-                           in3_Pin in4_Pin scl_Pin sda_Pin */
-  GPIO_InitStruct.Pin = recibe_datos_Pin|DO_infrarrojo_Pin|echo_ultrasonic_Pin|trig_ultras_nico_Pin
-                          |in3_Pin|in4_Pin|scl_Pin|sda_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : envia_datos_Pin */
-  GPIO_InitStruct.Pin = envia_datos_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(envia_datos_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : DA_infrarrojo_Pin */
-  GPIO_InitStruct.Pin = DA_infrarrojo_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  HAL_GPIO_Init(DA_infrarrojo_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : distancia_1_Pin distancia_2_Pin do_vibracion_Pin sg90_Pin
-                           ena_Pin in1_Pin in2_Pin enb_Pin */
-  GPIO_InitStruct.Pin = distancia_1_Pin|distancia_2_Pin|do_vibracion_Pin|sg90_Pin
-                          |ena_Pin|in1_Pin|in2_Pin|enb_Pin;
+  /*Configure GPIO pins : IN1_MOTOR_A_Pin IN2_MOTOR_A_Pin IN3_MOTOR_B_Pin IN4_MOTOR_B_Pin */
+  GPIO_InitStruct.Pin = IN1_MOTOR_A_Pin|IN2_MOTOR_A_Pin|IN3_MOTOR_B_Pin|IN4_MOTOR_B_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : da_vibraci_n_Pin */
-  GPIO_InitStruct.Pin = da_vibraci_n_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  HAL_GPIO_Init(da_vibraci_n_GPIO_Port, &GPIO_InitStruct);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

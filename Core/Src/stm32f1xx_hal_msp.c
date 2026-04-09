@@ -179,11 +179,12 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim)
     __HAL_RCC_GPIOB_CLK_ENABLE();
     /**TIM3 GPIO Configuration
     PB4     ------> TIM3_CH1
+    PB5     ------> TIM3_CH2
     */
-    GPIO_InitStruct.Pin = PWM_Pin;
+    GPIO_InitStruct.Pin = PWM1_ENA_Pin|PWM2_ENB_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIO_Init(PWM_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     __HAL_AFIO_REMAP_TIM3_PARTIAL();
 
