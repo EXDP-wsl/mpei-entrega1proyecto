@@ -63,6 +63,8 @@ void Error_Handler(void);
 #define recibe_datos_GPIO_Port GPIOA
 #define envia_datos_Pin GPIO_PIN_1
 #define envia_datos_GPIO_Port GPIOA
+#define ADC_Pin GPIO_PIN_2
+#define ADC_GPIO_Port GPIOA
 #define DO_infrarrojo_Pin GPIO_PIN_4
 #define DO_infrarrojo_GPIO_Port GPIOA
 #define DA_infrarrojo_Pin GPIO_PIN_5
