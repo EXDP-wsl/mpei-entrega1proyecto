@@ -77,6 +77,14 @@ void Ultrasonido_Trigger(void)
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 }
+void Ultrasonido_Procesar(void)
+{
+    if(echo_listo)
+    {
+        echo_listo = 0;
+        distancia_actual = echo_ancho / 58.0f;
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -120,14 +128,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if(echo_listo)
-	      {
-	          echo_listo = 0;
-	          distancia_actual = echo_ancho / 58.0f;
-	      }
     /* USER CODE END WHILE */
 	  Ultrasonido_Trigger();
+	  Ultrasonido_Procesar();
 	  HAL_Delay(60);
+
 
     /* USER CODE BEGIN 3 */
   }
