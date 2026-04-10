@@ -59,7 +59,15 @@ static void MX_ADC1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void Ultrasonido_Trigger(void)
+{
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 
+    __HAL_TIM_SET_COUNTER(&htim3, 0);
+    while(__HAL_TIM_GET_COUNTER(&htim3) < 10);
+
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+}
 /* USER CODE END 0 */
 
 /**
@@ -96,13 +104,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-
+  HAL_TIM_Base_Start(&htim3);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  Ultrasonido_Trigger();
+	  HAL_Delay(60);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
