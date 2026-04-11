@@ -113,6 +113,8 @@ void Control_Ejecutar(void)
         PWM_Configurar(60);
     }
 }
+
+
 /* USER CODE END 0 */
 
 /**
