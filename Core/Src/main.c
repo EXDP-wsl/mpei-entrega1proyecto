@@ -31,7 +31,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define DISTANCIA_10CM 10
+#define DISTANCIA_20CM 20
+#define DISTANCIA_40CM 40
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -63,7 +65,10 @@ static void MX_TIM3_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-
+void Motor_Parar(void);
+void Motor_Avanzar(void);
+void PWM_Configurar(uint8_t velocidad);
+void Control_Ejecutar(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -83,6 +88,29 @@ void Ultrasonido_Procesar(void)
     {
         echo_listo = 0;
         distancia_actual = echo_ancho / 58.0f;
+    }
+}
+void Control_Ejecutar(void)
+{
+    if(distancia_actual < DISTANCIA_10CM)
+    {
+        Motor_Parar();
+        PWM_Configurar(0);
+    }
+    else if(distancia_actual < DISTANCIA_20CM)
+    {
+        Motor_Avanzar();
+        PWM_Configurar(30);
+    }
+    else if(distancia_actual < DISTANCIA_40CM)
+    {
+        Motor_Avanzar();
+        PWM_Configurar(45);
+    }
+    else
+    {
+        Motor_Avanzar();
+        PWM_Configurar(60);
     }
 }
 /* USER CODE END 0 */
